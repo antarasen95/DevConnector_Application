@@ -1,0 +1,51 @@
+username: senac
+passwors: senac7
+
+for database: devconnector_senac
+
+github credentials
+
+username: antarasen95
+password: helloworld7
+
+
+3 resources:
+users
+profiles
+posts
+
+
+routes->api->files
+they are going to fetch json from backend and serve it to the front end
+so they it could be rendered or viewed
+
+Each resource we have :
+users
+profiles
+posts
+
+need to have a mongoose model schema so that it could be used to store data
+
+
+queries:
+ bcrypt.genSalt(10, (err, salt) =>{
+                bcrypt.hash(newUser.password, salt)
+            })
+        }
+
+
+
+HOW TO HIT THE REQUIRED API FROM FRONTEND??
+FOR THAT WE WILL BE USING AXIOS
+axios.get(/the api to be hit)
+for example
+
+axios.get(http://localhost/api/users/resgister)
+
+we just want to do
+axios.get(/api/user)
+
+
+
+WE WOULD BE USING REACT ROUTER AS WELL BECAUSE WE HAVE SO MANY PAGES
+AND WE NEED TO LINK THEM

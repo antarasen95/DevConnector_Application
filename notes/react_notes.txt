@@ -1,0 +1,63 @@
+1 . In react we could either have a class based component or a 
+functional component.
+
+Functional components will basically be used for
+ dumb components =>
+meaning the ones which need not require to have a state,
+dont require to use lifecycle methods etc.
+
+
+
+2. render() is a lifecycle method
+
+3. react uses JSX syntax. Its basically =>
+HTML inside your JavaScript
+
+WE WOULD BE USING REACT ROUTER AS WELL BECAUSE WE HAVE SO MANY PAGES
+AND WE NEED TO LINK THEM
+
+4. we will use react router to link to diffrent components
+
+
+REACT ROUTER V4 => react-router-dom
+
+we will use BrowserRouter
+
+
+5. First we ll try to signUp a user or register a user without using
+REDUX 
+
+without redux,
+we ll use "axios" which is an http client to interact with the 
+backend
+consider it something similar to postman
+we could have also used FetchAPI instead of axios
+
+REDUX comes into picture because STATE is private to a component
+so to exchange or tranfer or share state of variables/input fields
+between different components we need to use REDUX
+In REDUX we capture the state of the application rather than the state of
+the component
+Basically using for state Management
+
+we will use the term EXACT taki bas landing component pe hi jaye
+else all the other compoenents from other routes containing "/"
+will also get displayed
+
+
+just like we use <a href="link" /> in html
+in react we will use "link" to point to different routes
+
+
+each field lets say :email: needs to have their own state in their 
+component
+
+REDUX : deals with APPLICATION STATE
+HERE we are talking about COMPONENT STATE
+
+
+
+we ll be using:
+redux
+react-redux
+redux-thunk which is a middleware

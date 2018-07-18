@@ -1,0 +1,77 @@
+import { Provider } from 'react-redux';
+this will provide our entire application a state 
+and will store all of its data.
+Basically it has to wrap around everything
+
+
+<Provider store={ store } >
+
+to create our "store" we actually need a method
+
+Name of that Method is: createStore
+
+
+*****We are going to have multiple reducers*****
+1. one for auth
+2. one for profiles
+
+##arguments this method takes =>
+createStore(reducer, [preloadedState], [enhancer])
+
+applyMiddleware(...middleware)
+# three dots is called as spread operator
+(...this.props) => used by Mohit
+
+
+****another example *****
+const numbers = [1, 2, 3];
+
+
+console.log(sum(...numbers));
+
+
+
+****javascript switch******
+switch(expression) {
+    case n:
+        code block
+        break;
+    case n:
+        code block
+        break;
+    default:
+        code block
+}
+
+//initially setting up the boiler-plate for redux
+
+
+
+const store = createStore(
+    rootReducer,
+    initialState, 
+    applyMiddleware(...middleware)
+       
+);
+
+
+//we want to register a user through an "ACTION"
+evething in react is an action
+for example we click on SUBMIT button to register a USER =>
+which is an ACTION
+
+
+******ACTION*********
+now we are directly calling axios to put it into the database 
+but we dont want that
+rather an action should do it
+
+
+
+
+whenever u want to use redux in a component =>
+we will use =>
+import { connect } from 'react-redux'
+
+## A container is a react component that works with redux ##
+## any action which we bring in to the component will be called through props ##
