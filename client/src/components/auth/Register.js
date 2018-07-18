@@ -1,6 +1,10 @@
 
 import React, { Component } from 'react';
-import axios from 'axios';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { registerUser } from '../../actions/authActions';
+import classnames from 'classnames';
 
 class Register extends Component{
 
@@ -17,7 +21,14 @@ class Register extends Component{
 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-  }
+}
+
+componentWillReceiveProps(nextProps) {
+
+    if(nextProps.errors){
+      this.setState({errors: nextProps.errors});
+    }
+}
 
   //defining the onChange method
   onChange(e) {
@@ -38,23 +49,27 @@ class Register extends Component{
       password2: this.state.password2
     }
 
+    this.props.registerUser(newUser, this.props.history);
+    //allows us to redirect to the next page with Action
     //console.log(newUser)
-    axios.post('/api/users/register', newUser)
-    .then(res => console.log(res.data))
-    .catch(err => this.setState({errors: err.response.data}))
-
   }
 
     render(){
+      const { errors } = this.state;
+      
         return (
 
             <div>
+             
                   <h1 >Sign Up</h1>
                   <p >Create your DevConnector account</p>
-                  <form onSubmit={this.onSubmit} >
+                  <form noValidate onSubmit={this.onSubmit} >
                     <div className="form-group">
                       <input 
                       type="text"  
+                      className={classnames('form-control form-control-lg', {
+                        'is-invalid': errors.name
+                      })}
                       placeholder="Name" 
                       name="name" 
                       value={this.state.name}
@@ -63,6 +78,9 @@ class Register extends Component{
                     </div>
                     <div className="form-group">
                       <input type="email" 
+                      className={classnames('form-control form-control-lg', {
+                        'is-invalid': errors.email
+                      })}
                        placeholder="Email Address" 
                        name="email"
                        value={this.state.email}
@@ -71,6 +89,9 @@ class Register extends Component{
                       </div>
                     <div className="form-group">
                       <input type="password"  placeholder="Password" 
+                      className={classnames('form-control form-control-lg', {
+                        'is-invalid': errors.password
+                      })}
                       name="password" 
                       value={this.state.password}
                       onChange={this.onChange}
@@ -78,6 +99,9 @@ class Register extends Component{
                     </div>
                     <div className="form-group">
                       <input type="password"  placeholder="Confirm Password" 
+                      className={classnames('form-control form-control-lg', {
+                        'is-invalid': errors.password2
+                      })}
                       name="password2"
                       value={this.state.password2} 
                       onChange={this.onChange}
@@ -91,4 +115,21 @@ class Register extends Component{
     }
 }
 
-export default Register;
+//both registerUser and auth areb props of this component Register
+Register.propTypes = {
+  registerUser: PropTypes.func.isRequired, //bcoz it is a function
+  auth: PropTypes.object.isRequired        //bcoz it is an object
+
+}
+
+
+//to have state maped
+//so that it can be accessed as
+//this.props.auth.username let say
+const mapStateToProps = (state) => ({
+
+    auth: state.auth, //this **auth** comes from the root reducer "index.js"
+    errors: state.errors
+});
+
+export default connect(mapStateToProps, { registerUser })(withRouter(Register));
