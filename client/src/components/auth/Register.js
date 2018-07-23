@@ -23,6 +23,12 @@ class Register extends Component{
     this.onSubmit = this.onSubmit.bind(this);
 }
 
+componentDidMount(){
+  if(this.props.auth.isAuthenticated){
+    this.props.history.push('/dashboard');
+  }
+}
+
 componentWillReceiveProps(nextProps) {
 
     if(nextProps.errors){
@@ -86,6 +92,9 @@ componentWillReceiveProps(nextProps) {
                        value={this.state.email}
                        onChange={this.onChange}
                         />
+                          {errors.email && (
+                    <div className="invalid-feedback">{errors.email}</div>
+                     )}
                       </div>
                     <div className="form-group">
                       <input type="password"  placeholder="Password" 
@@ -96,6 +105,9 @@ componentWillReceiveProps(nextProps) {
                       value={this.state.password}
                       onChange={this.onChange}
                       />
+                        {errors.password && (
+                    <div className="invalid-feedback">{errors.password}</div>
+                     )}
                     </div>
                     <div className="form-group">
                       <input type="password"  placeholder="Confirm Password" 

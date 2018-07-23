@@ -1,24 +1,30 @@
+import isEmpty from '../validation/is-empty';
+
+import { SET_CURRENT_USER } from '../actions/types';
 
 const initialState = {
-
-    isAuthenticated: false,
-    user: {},
-    hello: 'test'
-}
+  isAuthenticated: false,
+  user: {}
+};
 
 //every reducer is going to export a function
 //we dispatch "action" to the reducer
+//standard javascript switch
 export default function(state = initialState, action) {
-    //standard javascript switch
-    switch(action.type) {
-        //we ll have cases
-        // case TEST_DISPATCH:
-        // return {
-        //     ...state,
-        //     user: action.payload
-        // }
-        default:
-            return state;
-    }
-
+  switch (action.type) {
+    case SET_CURRENT_USER:
+      return {
+        ...state,
+        isAuthenticated: !isEmpty(action.payload),
+        user: action.payload
+      };
+    default:
+      return state;
+  }
 }
+
+
+
+
+
+    
