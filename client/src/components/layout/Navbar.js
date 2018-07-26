@@ -6,14 +6,38 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logoutUser } from '../../actions/authActions';
+import Modal from 'react-modal';
  
 class Navbar extends Component{
 
+
+  constructor(props){
+    super(props);
+
+    this.state={
+      modalIsOpen: false
+    };
+
+    this.openModal=this.openModal.bind(this);
+  }
+
+ 
   onLogoutClick(e) {
 
     e.preventDefault();
     this.props.logoutUser();
 
+  }
+
+  openModal(){
+    this.setState({
+      modalIsOpen: true
+    });
+    
+  }
+
+  onSearch(){
+    alert('hey');
   }
 
     render(){
@@ -54,11 +78,15 @@ class Navbar extends Component{
           Logout
           </a>
         </li>
+        <li className="nav-item">
+            <nav className="nav-link" onClick={() => {this.openModal()}}> Set Up  A Meet
+            </nav>
+          </li>
       </ul>
       );
 
         return (
-
+    <div>
     <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
     <div className="container">
       <Link className="navbar-brand" to="/">DevConnector</Link>
@@ -67,18 +95,45 @@ class Navbar extends Component{
       </button>
 
       <div className="collapse navbar-collapse" id="mobile-nav">
-        <ul className="navbar-nav mr-auto">
-          <li className="nav-item">
-            <Link className="nav-link" to="/profiles"> Developers
-            </Link>
-          </li>
-        </ul>
+        
           
           {isAuthenticated ? authLinks : guestLinks}
      
       </div>
     </div>
   </nav>
+  <Modal
+  isOpen={this.state.modalIsOpen}
+  contentLabel="Invite Form"
+  >
+  <div style={{width:500}}>
+  <h2>invite form</h2>
+  <div>
+    <form className="form-group">
+          <label> name </label>
+          <br />
+          <input type="text" />
+          <br />
+          <label> businessUnit</label>
+          <br />
+          <input type="text" />
+          <br />
+          <label> racf </label>
+          <br />
+          <input type="text" />
+          <br />
+          <label> coffee/lunch</label>
+          <br />
+          <input type="text" />
+          <br />
+          <input type="submit" value="click me" onClick={() => this.onSearch()} />
+          
+      </form>
+    </div>
+  </div>
+
+    </Modal>
+  </div>
 
         )
     }
