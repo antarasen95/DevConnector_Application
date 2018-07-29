@@ -6,22 +6,11 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logoutUser } from '../../actions/authActions';
-import Modal from 'react-modal';
+
  
 class Navbar extends Component{
 
 
-  constructor(props){
-    super(props);
-
-    this.state={
-      modalIsOpen: false
-    };
-
-    this.openModal=this.openModal.bind(this);
-  }
-
- 
   onLogoutClick(e) {
 
     e.preventDefault();
@@ -29,16 +18,6 @@ class Navbar extends Component{
 
   }
 
-  openModal(){
-    this.setState({
-      modalIsOpen: true
-    });
-    
-  }
-
-  onSearch(){
-    alert('hey');
-  }
 
     render(){
 
@@ -49,7 +28,7 @@ class Navbar extends Component{
       //   isAuthenticated: false,
       //   user: {}
       // };
-      const { isAuthenticated, user } = this.props.auth;
+      const { isAuthenticated } = this.props.auth;
 
       //now we will  create two links one is authenticated user links and one is guest links
       const guestLinks = (
@@ -69,19 +48,19 @@ class Navbar extends Component{
 
       const authLinks = (
         <ul className="navbar-nav ml-auto">
+         <li className="nav-item">
+            <nav className="nav-link" > About Us
+            </nav>
+          </li>
         <li className="nav-item">
           <a 
           href="" 
           onClick={this.onLogoutClick.bind(this)} 
           className="nav-link">
-          <img src={user.avatar}  alt={user.name} style={{ width:'25px', marginRight: '5px' }} title="you must have a gravatar to your email" />
-          Logout
+            Logout
           </a>
         </li>
-        <li className="nav-item">
-            <nav className="nav-link" onClick={() => {this.openModal()}}> Set Up  A Meet
-            </nav>
-          </li>
+       
       </ul>
       );
 
@@ -102,37 +81,7 @@ class Navbar extends Component{
       </div>
     </div>
   </nav>
-  <Modal
-  isOpen={this.state.modalIsOpen}
-  contentLabel="Invite Form"
-  >
-  <div style={{width:500}}>
-  <h2>invite form</h2>
-  <div>
-    <form className="form-group">
-          <label> name </label>
-          <br />
-          <input type="text" />
-          <br />
-          <label> businessUnit</label>
-          <br />
-          <input type="text" />
-          <br />
-          <label> racf </label>
-          <br />
-          <input type="text" />
-          <br />
-          <label> coffee/lunch</label>
-          <br />
-          <input type="text" />
-          <br />
-          <input type="submit" value="click me" onClick={() => this.onSearch()} />
-          
-      </form>
-    </div>
-  </div>
-
-    </Modal>
+  
   </div>
 
         )
