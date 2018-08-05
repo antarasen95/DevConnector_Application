@@ -15,6 +15,7 @@ import Landing from './components/layout/Landing';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Dashboard from './components/dashboard/Dashboard';
+import Dashboard2 from './components/dashboard/Dashboard2';
 
 import setAuthToken from './utils/setAuthToken';
 import { setCurrentUser } from './actions/authActions'
@@ -60,6 +61,7 @@ class App extends Component {
 
       <Route exact path="/register" component={Register} />
       <Route exact path="/login" component={Login} />
+      <Route exact path="/dashboard2" component={Dashboard2} />
       <Switch>
       <PrivateRoute exact path="/dashboard" component={Dashboard} />
       </Switch>

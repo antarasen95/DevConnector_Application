@@ -5,6 +5,8 @@ import { withRouter } from 'react-router-dom';
 import { getCurrentProfile } from '../../actions/profileActions';
 import { createProfile } from '../../actions/profileActions';
 import Modal from 'react-modal';
+import axios from 'axios';
+
 
 
 class DashBoard extends React.Component{
@@ -21,8 +23,13 @@ class DashBoard extends React.Component{
       }
 
     componentDidMount(){
-        this.props.getCurrentProfile();
-    }
+     this.props.getCurrentProfile();
+    //    axios
+    // .get('/api/profile')
+    // .then(res => console.log(res.data ))
+    // .catch(err => console.log('hello i m error', err))
+    // 
+}
 
     openModal(){
         this.setState({
@@ -58,6 +65,8 @@ class DashBoard extends React.Component{
         const { user } = this.props.auth;
         const { profile, loading } = this.props.profile;
 
+        let profileItems;
+
         let dashboardContent;
 
         if(profile === null || loading){
@@ -65,7 +74,7 @@ class DashBoard extends React.Component{
         }
         else {
             //check if the loggedIn user has made any requests
-            if(Object.keys(profile).length > 0){
+            if(profile.length > 0){
                 dashboardContent = <h4> todo: dispaly profile </h4>
             }
             else {
@@ -86,7 +95,7 @@ class DashBoard extends React.Component{
             <div className="container">
             <div className ="row">
             <div className="col-md-12">
-            <h1 className="dispaly-4">DashBoard</h1>
+            <h2 className="dispaly-4">DashBoard</h2>
             {dashboardContent}
             </div>
             </div>
