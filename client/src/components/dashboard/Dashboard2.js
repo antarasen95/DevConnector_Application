@@ -1,32 +1,55 @@
 import React from 'react';
-import { Navbar, FormGroup, FormControl, Button } from 'react-bootstrap';
+import axios from 'axios';
+import { getCurrentProfile } from '../../actions/profileActions';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 class Dashboard2 extends React.Component{
 
+  constructor(props){
+    super(props);
 
+    this.state={
+      resData: []
+    }
+  }
+  componentDidMount(){
+    // this.props.getCurrentProfile();
+    // console.log(this.props.profile);
+    
+      axios
+   .get('/api/profile')
+   .then(res => this.setState({
+     resData: res.data
+   }))
+   .catch(err => console.log('hello i m error', err))
+
+   console.log(this.state.resData)
+   
+}
     render(){
         return(
            <div> 
-<Navbar>
-  <Navbar.Header>
-    <Navbar.Brand>
-      <a href="#home">Brand</a>
-    </Navbar.Brand>
-    <Navbar.Toggle />
-  </Navbar.Header>
-  <Navbar.Collapse>
-    <Navbar.Form pullLeft>
-      <FormGroup>
-        <FormControl type="text" placeholder="Search" />
-      </FormGroup>{' '}
-      <Button type="submit">Submit</Button>
-    </Navbar.Form>
-  </Navbar.Collapse>
-</Navbar>
+          Dashboard2
         </div>
                 
         )
     }
 }
 
-export default Dashboard2
+
+Dashboard2.propTypes = {
+  getCurrentProfile: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
+}
+
+const mapStateToProps = state => ({
+  profile: state.profile,
+  auth: state.auth,
+  errors: state.errors
+})
+
+
+export default connect( mapStateToProps, { getCurrentProfile })(Dashboard2)

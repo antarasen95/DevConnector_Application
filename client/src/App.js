@@ -16,6 +16,7 @@ import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Dashboard from './components/dashboard/Dashboard';
 import Dashboard2 from './components/dashboard/Dashboard2';
+import Posts from './components/posts/Posts';
 
 import setAuthToken from './utils/setAuthToken';
 import { setCurrentUser } from './actions/authActions'
@@ -63,7 +64,10 @@ class App extends Component {
       <Route exact path="/login" component={Login} />
       <Route exact path="/dashboard2" component={Dashboard2} />
       <Switch>
-      <PrivateRoute exact path="/dashboard" component={Dashboard} />
+        <PrivateRoute exact path="/dashboard" component={Dashboard} />
+      </Switch>
+      <Switch>
+        <PrivateRoute exact path="/feed" component={Posts} />
       </Switch>
 
       </div>
